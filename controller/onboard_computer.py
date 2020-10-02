@@ -26,6 +26,7 @@ trained using neuroevolution or reinforcement learning
 import abc
 import numpy as np
 import math
+
 # from drone.sensor.sensor import Sensor, get_positions_and_angles
 from controller.geometry import rotation_matrix
 from controller.physical_model import QuadcopterPhysics
@@ -91,7 +92,12 @@ class PIDControlUNnit(ControlUnit):
         # update linear
         lin_inputs = lab_pos
         lin_outputs = np.array(
-            [[pid.calculate(lin_inputs[i, 0]) for i, pid in enumerate(lin_pids)]]
+            [
+                [
+                    pid.calculate(lin_inputs[i, 0], lab_lin_vel[i, 0])
+                    for i, pid in enumerate(lin_pids)
+                ]
+            ]
         ).T
 
         # transform
@@ -107,7 +113,12 @@ class PIDControlUNnit(ControlUnit):
         # update rotational
         rot_inputs = drone_angle
         rot_outputs = np.array(
-            [[pid.calculate(rot_inputs[i, 0]) for i, pid in enumerate(rot_pids)]]
+            [
+                [
+                    pid.calculate(rot_inputs[i, 0], drone_angle_vel[i, 0])
+                    for i, pid in enumerate(rot_pids)
+                ]
+            ]
         ).T
         pid_outputs[0:3] = rot_outputs
         pid_outputs[3:6] = lin_outputs

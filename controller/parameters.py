@@ -9,7 +9,7 @@ Marvin Becker
 Python 3.6.5
 
 """
-
+N_THRUSTERS = 4
 payload_set = None  # set to None if no payload
 # GEOMETRY AND MASS
 mass_center = 0.200  # kg
