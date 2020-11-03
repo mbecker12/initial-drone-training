@@ -38,7 +38,7 @@ def setup_pids(paramset_num, delta_t=0.01):
             timeStep=delta_t,
             setValue=0,
             integralRange=2,
-            calculateFlag="velocity",
+            calculateFlag="noFlush",
             outputLimitRange=[-np.pi / 4, np.pi / 4],
         ),
         PID(
@@ -48,7 +48,7 @@ def setup_pids(paramset_num, delta_t=0.01):
             timeStep=delta_t,
             setValue=0,
             integralRange=2,
-            calculateFlag="velocity",
+            calculateFlag="noFlush",
             outputLimitRange=[-np.pi / 4, np.pi / 4],
         ),
         PID(
@@ -58,7 +58,7 @@ def setup_pids(paramset_num, delta_t=0.01):
             timeStep=delta_t,
             setValue=0,
             integralRange=2,
-            calculateFlag="velocity",
+            calculateFlag="noFlush",
         ),
     ]
 

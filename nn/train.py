@@ -228,7 +228,7 @@ def train(model, n_epochs, n_batches_train, n_batches_val, learning_rate, batch_
                 if val_loss < best_val_loss:
                     best_val_loss = val_loss
                     best_model = deepcopy(model)
-                    torch.save(best_model.state_dict(), "pretrained_drone_brain_wide")
+                    torch.save(best_model.state_dict(), "pretrained_drone_brain_wide_rot_velocity_lin_noflush")
 
                 preds = []
                 labels = []
@@ -257,7 +257,7 @@ if __name__ == "__main__":
         n_neurons4=64,
         n_outputs=4,
     )
-    n_epochs = 100
+    n_epochs = 25
     n_batches_train = 300
     n_batches_val = 100
     learning_rate = 0.0005
