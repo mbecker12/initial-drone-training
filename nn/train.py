@@ -228,7 +228,10 @@ def train(model, n_epochs, n_batches_train, n_batches_val, learning_rate, batch_
                 if val_loss < best_val_loss:
                     best_val_loss = val_loss
                     best_model = deepcopy(model)
-                    torch.save(best_model.state_dict(), "pretrained_drone_brain_wide_rot_velocity_lin_noflush")
+                    torch.save(
+                        best_model.state_dict(), 
+                        "pretrained_velocity_noflush_short"
+                    )
 
                 preds = []
                 labels = []
@@ -257,14 +260,17 @@ if __name__ == "__main__":
         n_neurons4=64,
         n_outputs=4,
     )
-    n_epochs = 25
-    n_batches_train = 300
+    n_epochs = 20
+    n_batches_train = 100
     n_batches_val = 100
     learning_rate = 0.0005
     batch_size = 32
     # print("Start Training...")
-    train(model, n_epochs, n_batches_train, n_batches_val, learning_rate, batch_size)
-
+    try:
+        train(model, n_epochs, n_batches_train, n_batches_val, learning_rate, batch_size)
+    except KeyboardInterrupt:
+        print("Caught KeyboardInterrupt. Proceed to evaluation.")
+        
     print("Training Finished...")
     print("Show model evaluation...")
     loss_fn = nn.L1Loss()
